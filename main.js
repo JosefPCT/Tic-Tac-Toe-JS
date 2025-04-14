@@ -15,8 +15,10 @@ const gameboard = (function (){
         }
     }
 
+    // returns the current iteration of the board
     const getBoard = () => board;
 
+    // Will make changes to the board array, takes in a player object for the token value, and a choice object of row and column
     const changeBoard = function(player, choice){
         console.log("showing changeboard method");
         board[choice.row][choice.column].addToken(player);
@@ -24,13 +26,24 @@ const gameboard = (function (){
     };
 
     const printBoard = function(){
-        board.forEach((item) => item.forEach((inneritem) => inneritem.showValue));
+
+        board.forEach((row) => {
+            // console.log ("Row");
+            let currentRow = "";
+            // row.forEach((column) => console.log(column.showValue()));
+            row.forEach((column) => {
+                currentRow += column.showValue() + " ";
+            });
+            console.log(currentRow);
+        })
     };
     return {getBoard, changeBoard, printBoard};
 })();
 
+// A cell factory function to be pushed into the board array
+// Has two methods, showValue and addToken that changes the value of the cell
 function Cell(){
-    let value = 0;
+    let value = "0";
 
     const showValue = () => value;
 
