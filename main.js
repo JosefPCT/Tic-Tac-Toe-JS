@@ -25,6 +25,7 @@ const gameboard = (function (){
         
     };
 
+    // Prints the board in a readable state in the console
     const printBoard = function(){
 
         board.forEach((row) => {
@@ -54,5 +55,16 @@ function Cell(){
     return {addToken, showValue};
 }
 
+const gameController = (function (){ 
+    console.log("game controller firing...");
+    gameboard.printBoard();
+})();
+
 testPlayer = { token: "X" };
 testChoice = { row: 1, column: 2};
+gameboard.changeBoard(testPlayer,testChoice);
+gameboard.printBoard();
+
+
+
+
