@@ -55,15 +55,44 @@ function Cell(){
     return {addToken, showValue};
 }
 
+function createPlayer(name,token){
+    return { name, token};
+}
+
 const gameController = (function (){ 
     console.log("game controller firing...");
+    
+    //creates the players
+    const playerOne = createPlayer("Adan","O");
+    const playerTwo = createPlayer("Eve","X");
+    const players = {playerOne, playerTwo};
+    console.log(players);
+
+    //set default active player
+    let activePlayer = players.playerOne;
+
+    //Get the active player
+    const getActivePlayer = () => activePlayer;
+
+    const switchActivePlayer = function(){
+        if(activePlayer === players.playerOne){
+            activePlayer = players.playerTwo;
+        } else {
+            activePlayer = players.playerOne;
+        }
+    }
+
     gameboard.printBoard();
+
+    return { getActivePlayer, switchActivePlayer};
 })();
 
-testPlayer = { token: "X" };
-testChoice = { row: 1, column: 2};
-gameboard.changeBoard(testPlayer,testChoice);
-gameboard.printBoard();
+const players = {}
+
+// testPlayer = { token: "X" };
+// testChoice = { row: 1, column: 2};
+// gameboard.changeBoard(testPlayer,testChoice);
+// gameboard.printBoard();
 
 
 
