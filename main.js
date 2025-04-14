@@ -11,14 +11,35 @@ const gameboard = (function (){
     for(let i = 0; i < rows; i++){
         board[i] = [];
         for(let j = 0; j < columns; j++){
-            board[i].push("");
+            board[i].push(Cell());
         }
     }
 
-    const showBoard = () => board;
+    const getBoard = () => board;
 
     const changeBoard = function(player, choice){
         console.log("showing changeboard method");
+        board[choice.row][choice.column].addToken(player);
+        
     };
-    return {showBoard, changeBoard};
+
+    const printBoard = function(){
+        board.forEach((item) => item.forEach((inneritem) => inneritem.showValue));
+    };
+    return {getBoard, changeBoard, printBoard};
 })();
+
+function Cell(){
+    let value = 0;
+
+    const showValue = () => value;
+
+    const addToken = function(player){
+        value = player.token;
+    };
+
+    return {addToken, showValue};
+}
+
+testPlayer = { token: "X" };
+testChoice = { row: 1, column: 2};
