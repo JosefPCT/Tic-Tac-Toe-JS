@@ -74,17 +74,35 @@ const gameController = (function (){
     //Get the active player
     const getActivePlayer = () => activePlayer;
 
-    const switchActivePlayer = function(){
-        if(activePlayer === players.playerOne){
-            activePlayer = players.playerTwo;
-        } else {
-            activePlayer = players.playerOne;
-        }
+    // const switchActivePlayer = function(){
+    //     if(activePlayer === players.playerOne){
+    //         activePlayer = players.playerTwo;
+    //     } else {
+    //         activePlayer = players.playerOne;
+    //     }
+    // }
+
+    const switchActivePlayer = () => activePlayer === players.playerOne ? activePlayer = players.playerTwo : activePlayer = players.playerOne;
+
+    const showRound = function(){
+        console.log("Active player is: " + getActivePlayer().name);
+        gameboard.printBoard();
     }
 
+    const playRound = function(){
+        console.log("Input your choice, ");
+        const rowChoice= prompt("What row?:");
+        const columnChoice = prompt("What column?: ");
+        console.log(rowChoice);
+        console.log(columnChoice);
+        const choice = {row: rowChoice, column: columnChoice};
+        gameboard.changeBoard(getActivePlayer(), choice);
+        gameboard.printBoard();
+    }
+ 
     gameboard.printBoard();
 
-    return { getActivePlayer, switchActivePlayer};
+    return { getActivePlayer, switchActivePlayer, showRound, playRound};
 })();
 
 const players = {}
